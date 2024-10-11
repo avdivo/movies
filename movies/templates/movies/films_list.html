@@ -1,23 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Список фильмов</title>
-</head>
-<body>
-    <h1>Список фильмов</h1>
-    <div>
+{% extends "base.html" %}
+
+{% block content %}
+    <h1 class="my-4">Список фильмов</h1>
+    <div class="row">
         {% for film in films %}
-            <div>
-                <img src="{{ film.poster.url }}" alt="{{ film.title }}">
-                <h2>{{ film.title }} ({{ film.release_year }})</h2>
-                <p>Режиссер: {{ film.director }}</p>
-                <p>Жанр: {{ film.genre }}</p>
-                <a href="{% url 'film-detail' film.id %}">Подробнее</a>
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100">
+                    <img src="{{ film.poster.url }}" class="card-img-top" alt="{{ film.title }}">
+                    <div class="card-body">
+                        <h4 class="card-title">{{ film.title }}</h4>
+                        <p class="card-text">Год выпуска: {{ film.release_year }}</p>
+                        <p class="card-text">Режиссер: {{ film.director }}</p>
+                        <p class="card-text">Жанр: {{ film.genre }}</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="{% url 'film-detail' film.id %}" class="btn btn-primary">Подробнее</a>
+                    </div>
+                </div>
             </div>
         {% endfor %}
     </div>
-    <a href="{% url 'film-add' %}">Добавить фильм</a>
-</body>
-</html>
+    <a href="{% url 'film-add' %}" class="btn btn-success mt-4">Добавить фильм</a>
+{% endblock %}

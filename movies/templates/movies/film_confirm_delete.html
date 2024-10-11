@@ -1,16 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Удалить фильм</title>
-</head>
-<body>
-    <h1>Вы уверены, что хотите удалить фильм "{{ film.title }}"?</h1>
-    <form method="POST">
-        {% csrf_token %}
-        <button type="submit">Удалить</button>
-        <a href="{% url 'film-detail' film.id %}">Отмена</a>
-    </form>
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="row justify-content-center my-4">
+        <div class="col-md-6">
+            <h2>Удалить фильм</h2>
+            <p>Вы уверены, что хотите удалить фильм "{{ film.title }}"?</p>
+            <form method="POST">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Удалить</button>
+                <a href="{% url 'film-detail' film.id %}" class="btn btn-secondary">Отмена</a>
+            </form>
+        </div>
+    </div>
+{% endblock %}

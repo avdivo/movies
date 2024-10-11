@@ -1,19 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ film.title }}</title>
-</head>
-<body>
-    <img src="{{ film.poster.url }}" alt="{{ film.title }}">
-    <h1>{{ film.title }} ({{ film.release_year }})</h1>
-    <p>{{ film.description }}</p>
-    <p>Режиссер: {{ film.director }}</p>
-    <p>Жанр: {{ film.genre }}</p>
+{% extends "base.html" %}
 
-    <a href="{% url 'film-edit' film.id %}">Редактировать</a>
-    <a href="{% url 'film-delete' film.id %}">Удалить</a>
-    <a href="{% url 'film-list' %}">Вернуться к списку</a>
-</body>
-</html>
+{% block content %}
+    <div class="row my-4">
+        <div class="col-md-6">
+            <img src="{{ film.poster.url }}" class="img-fluid" alt="{{ film.title }}">
+        </div>
+        <div class="col-md-6">
+            <h1>{{ film.title }}</h1>
+            <p class="lead">{{ film.description }}</p>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Год выпуска: {{ film.release_year }}</li>
+                <li class="list-group-item">Режиссер: {{ film.director }}</li>
+                <li class="list-group-item">Жанр: {{ film.genre }}</li>
+            </ul>
+            <div class="mt-4">
+                <a href="{% url 'film-edit' film.id %}" class="btn btn-warning">Редактировать</a>
+                <a href="{% url 'film-delete' film.id %}" class="btn btn-danger">Удалить</a>
+                <a href="{% url 'film-list' %}" class="btn btn-secondary">Вернуться к списку</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
