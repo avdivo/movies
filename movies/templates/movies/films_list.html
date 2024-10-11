@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список фильмов</title>
+</head>
+<body>
+    <h1>Список фильмов</h1>
+    <div>
+        {% for film in films %}
+            <div>
+                <img src="{{ film.poster.url }}" alt="{{ film.title }}">
+                <h2>{{ film.title }} ({{ film.release_year }})</h2>
+                <p>Режиссер: {{ film.director }}</p>
+                <p>Жанр: {{ film.genre }}</p>
+                <a href="{% url 'film-detail' film.id %}">Подробнее</a>
+            </div>
+        {% endfor %}
+    </div>
+    <a href="{% url 'film-add' %}">Добавить фильм</a>
+</body>
+</html>
