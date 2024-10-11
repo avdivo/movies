@@ -3,7 +3,17 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.urls import reverse_lazy
 from .models import Film
 from .forms import FilmForm
+from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from .serializers import FilmSerializer
 
+# Вьюха для API
+class FilmViewSet(viewsets.ModelViewSet):
+    queryset = Film.objects.all()
+    serializer_class = FilmSerializer
+    # permission_classes = [IsAuthenticatedOrReadOnly]
+
+# Вьюхи для веб-приложения остаются без изменений
 class FilmListView(ListView):
     model = Film
     template_name = 'movies/films_list.html'
